@@ -197,10 +197,21 @@
       gap: 12px;
       padding: 16px;
     }
-    .tile.live { padding: 14px; }
-    .tile.live img { width: 42px; height: 42px; }
+    .tile {
+      aspect-ratio: unset;
+    }
+    .tile.live {
+      padding: 14px;
+      min-height: 150px;
+    }
+    .tile.live img,
+    .tile.live svg {
+      width: 38px !important;
+      height: 38px !important;
+    }
     .tile.live .domain { font-size: 0.8rem; }
-    .tile.live .tagline { font-size: 0.7rem; }
+    .tile.live .tagline { font-size: 0.68rem; }
+    .tile.placeholder { min-height: 90px; }
     .nav-links { display: none; }
     .site-footer { padding: 16px 20px; }
   }
