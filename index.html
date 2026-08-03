@@ -7,34 +7,45 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1430'/%3E%3Ctext x='20' y='42' font-family='Segoe UI, Arial, sans-serif' font-size='26' font-weight='300' fill='%23dbe1f2' text-anchor='middle'%3EN%3C/text%3E%3Ctext x='42' y='42' font-family='Segoe UI, Arial, sans-serif' font-size='26' font-weight='800' fill='%23b98b3d' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <style>
   :root {
-    --ink: #eceef1;
-    --ink-soft: #9aa1ac;
-    --card-ink: #1c1c1e;
-    --card-ink-soft: #5c6370;
-    --line: #e3e1da;
-    --bg: #14171c;
-    --white: #f5f4f0;
-    --accent: #b98b3d;
-    --accent-soft: #eceae2;
+    --bg: #f8f6f2;
+    --bg-elevated: #efece2;
+    --surface: #ffffff;
+    --surface-hover: #fbf9f4;
+    --border: #e5e0d5;
+    --border-hover: #d0c9b8;
+    --ink: #1d2027;
+    --ink-soft: #5c6270;
+    --ink-faint: #949aa4;
+    --accent: #b07f2e;
+    --accent-soft: #b07f2e14;
+    --accent-ink: #2a1c08;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, #b07f2e12, transparent 45%),
+      radial-gradient(circle at 85% 15%, #4f5cd60d, transparent 40%);
     color: var(--ink);
     line-height: 1.5;
+    min-height: 100vh;
   }
 
   /* Header */
   .site-header {
-    background: var(--bg);
-    color: var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(248, 246, 242, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
   }
   .nav {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 12px 32px;
+    padding: 18px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +56,7 @@
     gap: 12px;
   }
   .brand-wordmark {
-    font-size: 1.3rem;
+    font-size: 1.32rem;
     letter-spacing: 0.2px;
   }
   .brand-wordmark .nexi {
@@ -58,162 +69,201 @@
   }
   .brand-text small {
     display: block;
-    font-size: 0.62rem;
-    font-weight: 400;
-    color: var(--ink-soft);
-    letter-spacing: 0.8px;
-    margin-top: 2px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 1.4px;
+    margin-top: 3px;
   }
   .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 36px;
   }
   .nav-links a {
     color: var(--ink-soft);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: filter 0.15s ease;
+  }
+  .cta-btn:hover { filter: brightness(1.08); }
+  .cta-btn svg { width: 14px; height: 14px; }
 
-  /* Portfolio note */
-  .hero-inner {
-    max-width: 620px;
+  /* Hero */
+  .hero {
+    max-width: 760px;
     margin: 0 auto;
     text-align: center;
+    padding: 72px 32px 8px;
   }
   .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     text-transform: uppercase;
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     letter-spacing: 2px;
     color: var(--accent);
     font-weight: 700;
+    background: var(--accent-soft);
+    border: 1px solid #b07f2e33;
+    border-radius: 100px;
+    padding: 6px 14px;
   }
-  .hero-inner p {
-    margin-top: 6px;
-    font-size: 0.85rem;
+  .hero h1 {
+    margin-top: 22px;
+    font-size: clamp(1.15rem, 5vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .hero p {
+    margin-top: 14px;
+    font-size: 1rem;
     color: var(--ink-soft);
+    line-height: 1.6;
   }
 
   /* Products */
   .products {
-    max-width: 1040px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 40px 32px 24px;
+    padding: 48px 32px 96px;
   }
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 20px;
   }
   .tile {
-    background: var(--white);
+    background: var(--surface);
     text-decoration: none;
     color: inherit;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 6px 14px rgba(0,0,0,0.25);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  }
-  .tile.live {
+    min-height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 14px;
+    gap: 10px;
+    padding: 26px 20px;
     text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
   }
-  .tile.live img,
-  .tile.live svg {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    display: block;
-  }
-  .tile.live .domain {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--card-ink);
-    margin-top: 4px;
-  }
-  .tile.live .tagline {
-    font-size: 0.7rem;
-    color: var(--card-ink-soft);
-    line-height: 1.3;
+  .tile.live {
+    cursor: pointer;
   }
   .tile.live:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 14px 28px rgba(0,0,0,0.4);
-    border-color: #cfccc3;
-  }
-  .icon-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 9px;
-    background: var(--accent-soft);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .icon-badge svg {
-    width: 21px;
-    height: 21px;
+    background: var(--surface-hover);
+    border-color: var(--border-hover);
+    box-shadow: 0 16px 32px -14px rgba(29,32,39,0.18);
   }
   .tile.live.no-link {
     cursor: default;
   }
-  .tile.live.no-link:hover {
-    transform: none;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 6px 14px rgba(0,0,0,0.25);
-    border-color: var(--line);
-  }
 
-  .tile.placeholder {
+  .icon-frame {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-hover);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    margin-bottom: 4px;
+  }
+  .icon-frame img,
+  .icon-frame svg {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .tile .domain {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.1px;
+  }
+  .tile .tagline {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    max-width: 220px;
+  }
+
+  .tile.placeholder {
+    border-style: dashed;
+    background: transparent;
   }
   .tile.placeholder .foot {
     font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    font-weight: 700;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: #a7a49b;
+    color: var(--ink-faint);
+  }
+  .tile.placeholder .plus {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-faint);
+    font-size: 1.1rem;
+    line-height: 1;
+    margin-bottom: 2px;
   }
 
   @media (max-width: 980px) {
     .grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
-    .nav { padding: 12px 20px; }
+    .nav { padding: 14px 20px; }
     .brand-wordmark { font-size: 1.15rem; }
-    .hero-inner p { font-size: 0.78rem; }
-    .products { padding: 0 16px 24px; }
+    .hero { padding: 48px 20px 4px; }
+    .hero p { font-size: 0.9rem; }
+    .products { padding: 32px 16px 64px; }
     .grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      padding: 16px;
     }
     .tile {
-      aspect-ratio: unset;
+      min-height: 170px;
+      padding: 18px 14px;
     }
-    .tile.live {
-      padding: 14px;
-      min-height: 150px;
-    }
-    .tile.live img,
-    .tile.live svg {
-      width: 38px !important;
-      height: 38px !important;
-    }
-    .tile.live .domain { font-size: 0.8rem; }
-    .tile.live .tagline { font-size: 0.68rem; }
-    .tile.placeholder { min-height: 90px; }
+    .icon-frame { width: 48px; height: 48px; border-radius: 12px; }
+    .icon-frame img,
+    .icon-frame svg { width: 26px; height: 26px; }
+    .tile .domain { font-size: 0.86rem; }
+    .tile .tagline { font-size: 0.72rem; }
     .nav-links { display: none; }
-    .site-footer { padding: 16px 20px; }
   }
   @media (max-width: 380px) {
     .grid { grid-template-columns: 1fr; }
@@ -221,15 +271,28 @@
 
   /* Footer */
   .site-footer {
-    background: var(--bg);
-    color: var(--ink-soft);
-    padding: 18px 32px;
-    text-align: center;
-    font-size: 0.78rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
   }
-  .site-footer strong { color: var(--ink); }
-  .site-footer .legal {
-    margin-top: 6px;
+  .footer-legal {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .footer-contact {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .footer-contact:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .site-footer { flex-direction: column; text-align: center; padding: 20px; }
   }
 </style>
 </head>
@@ -243,70 +306,90 @@
         <small>TECHNOLOGIES PRIVATE LIMITED</small>
       </div>
     </div>
-    <nav class="nav-links">
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-    </nav>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="cta-btn" href="mailto:contact@nexibeam.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>
+        Contact
+      </a>
+    </div>
   </div>
 </header>
 
+<section class="hero">
+  <span class="eyebrow">Our Product Portfolio</span>
+  <h1>A portfolio of independent software products.</h1>
+  <p>NexiBeam Technologies Private Limited designs and operates a portfolio of independent products across hiring, marketing, and outbound sales.</p>
+</section>
+
 <section class="products" id="products">
-  <div class="hero-inner" style="margin-bottom: 28px;">
-    <div class="eyebrow">Our Product Portfolio</div>
-    <p>NexiBeam Technologies Private Limited designs and operates a portfolio of independent products.</p>
-  </div>
   <div class="grid">
 
     <a class="tile live" href="https://www.interviewwatch.com" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.interviewwatch.com/favicon.svg" alt="InterviewWatch">
-      <div class="domain"><span style="color:var(--card-ink);">Interview</span><span style="color:#4f46e5;">Watch</span></div>
-      <div class="tagline">AI-powered interview monitoring for hiring teams.</div>
+      <div class="icon-frame">
+        <img src="https://www.interviewwatch.com/favicon.svg" alt="InterviewWatch">
+      </div>
+      <div class="domain"><span style="color:var(--ink);">Interview</span><span style="color:#4338ca;">Watch</span></div>
+      <div class="tagline">Live interview monitoring for hiring teams.</div>
     </a>
 
     <a class="tile live" href="https://www.monochalk.com" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.monochalk.com/assets/brand/monochalk-logo.svg?v=20260710-symmetric" alt="MonoChalk" style="width:52px;height:52px;">
-      <div class="domain" style="color:var(--card-ink);border-bottom:2px solid #D8FF63;display:inline-block;padding-bottom:1px;">MonoChalk</div>
+      <div class="icon-frame">
+        <img src="https://www.monochalk.com/assets/brand/monochalk-logo.svg?v=20260710-symmetric" alt="MonoChalk" style="width:36px;height:36px;">
+      </div>
+      <div class="domain" style="color:var(--ink);border-bottom:2px solid #D8FF63;display:inline-block;padding-bottom:1px;">MonoChalk</div>
       <div class="tagline">One integration to publish across every social platform.</div>
     </a>
 
     <div class="tile live no-link">
-      <svg viewBox="0 0 256 256" role="img" aria-label="OutreachAmp">
-        <rect x="34" y="66" width="188" height="130" rx="18" fill="none" stroke="#10110f" stroke-width="14"/>
-        <path d="M40 78 128 148 216 78" fill="none" stroke="#10110f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M140 96 108 148 132 148 116 190 176 130 148 130Z" fill="#c7ff3d" stroke="#204e3c" stroke-width="6" stroke-linejoin="round"/>
-      </svg>
+      <div class="icon-frame">
+        <svg viewBox="0 0 256 256" role="img" aria-label="OutreachAmp">
+          <rect x="34" y="66" width="188" height="130" rx="18" fill="none" stroke="#1d2027" stroke-width="14"/>
+          <path d="M40 78 128 148 216 78" fill="none" stroke="#1d2027" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M140 96 108 148 132 148 116 190 176 130 148 130Z" fill="#c7ff3d" stroke="#4d8a1f" stroke-width="4" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div class="domain">OutreachAmp</div>
-      <div class="tagline">The AI outbound operating system for teams with something worth selling.</div>
+      <div class="tagline">The AI outbound operating system for sales teams.</div>
     </div>
 
     <div class="tile live no-link">
-      <svg viewBox="0 0 256 256" role="img" aria-label="Prospectr">
-        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="128" cy="128" r="78" stroke="#102A56" stroke-width="12"/>
-          <path d="M128 16 139 55 128 64 117 55ZM240 128 201 139 192 128 201 117ZM128 240 117 201 128 192 139 201ZM16 128 55 117 64 128 55 139Z" fill="#102A56" stroke="none"/>
-          <path d="M75 105a58 58 0 0 1 26-30M181 151a58 58 0 0 1-26 30" stroke="#9FD9D7" stroke-width="8"/>
-        </g>
-        <path d="m80 184 31-70 65-42-31 70Z" fill="#0AA69A"/>
-        <path d="m176 72-65 42 34 28Z" fill="#0DB5A8"/>
-        <circle cx="128" cy="128" r="14" fill="#FFFFFF"/>
-      </svg>
+      <div class="icon-frame">
+        <svg viewBox="0 0 256 256" role="img" aria-label="Prospectr">
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="128" cy="128" r="78" stroke="#0d7a70" stroke-width="12"/>
+            <path d="M128 16 139 55 128 64 117 55ZM240 128 201 139 192 128 201 117ZM128 240 117 201 128 192 139 201ZM16 128 55 117 64 128 55 139Z" fill="#0d7a70" stroke="none"/>
+            <path d="M75 105a58 58 0 0 1 26-30M181 151a58 58 0 0 1-26 30" stroke="#0d7a70" stroke-width="8"/>
+          </g>
+          <path d="m80 184 31-70 65-42-31 70Z" fill="#0AA69A"/>
+          <path d="m176 72-65 42 34 28Z" fill="#0DB5A8"/>
+          <circle cx="128" cy="128" r="14" fill="#0f2a26"/>
+        </svg>
+      </div>
       <div class="domain">Prospectr</div>
       <div class="tagline">Turn buying signals into LinkedIn conversations.</div>
     </div>
 
     <div class="tile placeholder">
+      <div class="plus">+</div>
       <div class="foot">Coming Soon</div>
     </div>
 
     <div class="tile placeholder">
+      <div class="plus">+</div>
       <div class="foot">Coming Soon</div>
     </div>
 
     <div class="tile placeholder">
+      <div class="plus">+</div>
       <div class="foot">Coming Soon</div>
     </div>
 
     <div class="tile placeholder">
+      <div class="plus">+</div>
       <div class="foot">Coming Soon</div>
     </div>
 
@@ -314,8 +397,8 @@
 </section>
 
 <footer class="site-footer" id="about">
-  <div><strong>NexiBeam Technologies Private Limited</strong></div>
-  <div class="legal">&copy; 2026 NexiBeam Technologies Private Limited. All rights reserved.</div>
+  <div class="footer-legal">&copy; 2026 NexiBeam Technologies Private Limited. All rights reserved.</div>
+  <a class="footer-contact" href="mailto:contact@nexibeam.com">contact@nexibeam.com</a>
 </footer>
 
 </body>
