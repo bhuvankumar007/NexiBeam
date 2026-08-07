@@ -152,8 +152,10 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    max-width: 640px;
+    margin: 0 auto;
   }
   .tile {
     background: var(--surface);
@@ -241,9 +243,6 @@
     margin-bottom: 2px;
   }
 
-  @media (max-width: 980px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
   @media (max-width: 640px) {
     .nav { padding: 14px 20px; }
     .brand-wordmark { font-size: 1.15rem; }
@@ -264,9 +263,6 @@
     .tile .domain { font-size: 0.86rem; }
     .tile .tagline { font-size: 0.72rem; }
     .nav-links { display: none; }
-  }
-  @media (max-width: 380px) {
-    .grid { grid-template-columns: 1fr; }
   }
 
   /* Footer */
@@ -335,48 +331,6 @@
       <div class="domain"><span style="color:var(--ink);">Interview</span><span style="color:#4338ca;">Watch</span></div>
       <div class="tagline">Live interview monitoring for hiring teams.</div>
     </a>
-
-    <a class="tile live" href="https://www.monochalk.com" target="_blank" rel="noopener noreferrer">
-      <div class="icon-frame">
-        <img src="https://www.monochalk.com/assets/brand/monochalk-logo.svg?v=20260710-symmetric" alt="MonoChalk" style="width:36px;height:36px;">
-      </div>
-      <div class="domain" style="color:var(--ink);border-bottom:2px solid #D8FF63;display:inline-block;padding-bottom:1px;">MonoChalk</div>
-      <div class="tagline">One integration to publish across every social platform.</div>
-    </a>
-
-    <div class="tile live no-link">
-      <div class="icon-frame">
-        <svg viewBox="0 0 256 256" role="img" aria-label="Prospectr">
-          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="128" cy="128" r="78" stroke="#0d7a70" stroke-width="12"/>
-            <path d="M128 16 139 55 128 64 117 55ZM240 128 201 139 192 128 201 117ZM128 240 117 201 128 192 139 201ZM16 128 55 117 64 128 55 139Z" fill="#0d7a70" stroke="none"/>
-            <path d="M75 105a58 58 0 0 1 26-30M181 151a58 58 0 0 1-26 30" stroke="#0d7a70" stroke-width="8"/>
-          </g>
-          <path d="m80 184 31-70 65-42-31 70Z" fill="#0AA69A"/>
-          <path d="m176 72-65 42 34 28Z" fill="#0DB5A8"/>
-          <circle cx="128" cy="128" r="14" fill="#0f2a26"/>
-        </svg>
-      </div>
-      <div class="domain">Prospectr</div>
-      <div class="tagline">Turn buying signals into LinkedIn conversations.</div>
-    </div>
-
-    <div class="tile live no-link">
-      <div class="icon-frame">
-        <svg viewBox="0 0 256 256" role="img" aria-label="OutreachAmp">
-          <rect x="34" y="66" width="188" height="130" rx="18" fill="none" stroke="#1d2027" stroke-width="14"/>
-          <path d="M40 78 128 148 216 78" fill="none" stroke="#1d2027" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M140 96 108 148 132 148 116 190 176 130 148 130Z" fill="#c7ff3d" stroke="#4d8a1f" stroke-width="4" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="domain">OutreachAmp</div>
-      <div class="tagline">The AI outbound operating system for sales teams.</div>
-    </div>
-
-    <div class="tile placeholder">
-      <div class="plus">+</div>
-      <div class="foot">Coming Soon</div>
-    </div>
 
     <div class="tile placeholder">
       <div class="plus">+</div>
